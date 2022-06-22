@@ -1,0 +1,289 @@
+{
+	"info": {
+		"_postman_id": "40228e18-8fcb-4d88-a319-69ef07096b56",
+		"name": "PostFullCycle",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11722837"
+	},
+	"item": [
+		{
+			"name": "createUserInfo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// jsonData.id\r",
+							"\r",
+							" var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.globals.set(\"id\", jsonData.id);\r",
+							"\r",
+							"console.log(pm.globals.get(\"id\"));\r",
+							"\r",
+							"pm.globals.set(\"userName\", jsonData.name);\r",
+							"\r",
+							"console.log(pm.globals.get(\"userName\"));\r",
+							"\r",
+							"pm.globals.set(\"ttielOfjob\", jsonData.job);\r",
+							"\r",
+							"console.log(pm.globals.get(\"ttielOfjob\"));\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"id\"));\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"// pm.test(\"Your test name\", function () {\r",
+							"   \r",
+							"//     pm.expect(jsonData.value).to.eql(100);\r",
+							"// });\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"//  var jsonData = pm.response.json();\r",
+							"// //  var name=jsonData.id;\r",
+							"\r",
+							"// pm.globals.set(\"userId\", jsonData.id);\r",
+							"// console.log(pm.globals.get(\"userId\"));\r",
+							"\r",
+							"// pm.globals.set(\"name\", jsonData.name);\r",
+							"// console.log(pm.globals.get(\"name\"));\r",
+							"\r",
+							"// pm.globals.set(\"jobTitle\", jsonData.jobTitle);\r",
+							"// console.log(pm.globals.get(\"jobTitle\"));\r",
+							"\r",
+							"// var jsonData = pm.response.json();\r",
+							"\r",
+							"// pm.test(\"Verify Your userId ok \", function () {\r",
+							"//     pm.expect(jsonData.id).to.eql(pm.globals.get(\"userId\"));\r",
+							"// });\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{$randomFullName}}\",\r\n    \"job\": \"{{$randomJobTitle}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{mockServerUrl}}/posts",
+					"host": [
+						"{{mockServerUrl}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCreatedSingleUserInfo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"console.log(pm.globals.get(\"id\"));\r",
+							"\r",
+							"\r",
+							"pm.test(\"Verify User Id is ok\", function () {\r",
+							"    pm.expect(jsonData.id).to.eql(pm.globals.get(\"id\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{mockServerUrl}}/posts/{{id}}",
+					"host": [
+						"{{mockServerUrl}}"
+					],
+					"path": [
+						"posts",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateCreatedSingleUserJobInfo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"console.log(pm.globals.get(\"id\"));\r",
+							"\r",
+							"\r",
+							"pm.test(\"Verify User Id is ok\", function () {\r",
+							"    pm.expect(jsonData.id).to.eql(jsonData.id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{userName}}\",\r\n    \"job\": \"{{$randomJobTitle}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{mockServerUrl}}/posts/{{id}}",
+					"host": [
+						"{{mockServerUrl}}"
+					],
+					"path": [
+						"posts",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updatePartialSingleUserJobInfo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"console.log(pm.globals.get(\"id\"));\r",
+							"\r",
+							"\r",
+							"pm.test(\"Verify User Id is ok\", function () {\r",
+							"    pm.expect(jsonData.id).to.eql(pm.globals.get(\"id\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"job\": \"{{$randomJobTitle}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{mockServerUrl}}/posts/{{id}}",
+					"host": [
+						"{{mockServerUrl}}"
+					],
+					"path": [
+						"posts",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteSingleUserJobInfo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// var jsonData = pm.response.json();\r",
+							"\r",
+							"// console.log(pm.globals.get(\"id\"));\r",
+							"\r",
+							"\r",
+							"// pm.test(\"Verify User Id is ok\", function () {\r",
+							"//     pm.expect(jsonData.id).to.eql(pm.globals.get(\"id\"));\r",
+							"// });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{mockServerUrl}}/posts/{{id}}",
+					"host": [
+						"{{mockServerUrl}}"
+					],
+					"path": [
+						"posts",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

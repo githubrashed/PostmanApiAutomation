@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "4ff5e278-81ad-47e6-9931-9cd23c921a49",
+		"name": "Authorization",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11722837"
+	},
+	"item": [
+		{
+			"name": "getCsrfToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseHTML = cheerio(pm.response.text());\r",
+							"pm.globals.set(\"csrfToken\", responseHTML.find('[name=\"_csrf\"]').val());\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{authUrl}}/node/",
+					"host": [
+						"{{authUrl}}"
+					],
+					"path": [
+						"node",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postLogin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{authUrl}}/j_spring_security_check?_csrf={{csrfToken}}&j_username=00165286&j_username_txt=00165286&j_password=abc123$",
+					"host": [
+						"{{authUrl}}"
+					],
+					"path": [
+						"j_spring_security_check"
+					],
+					"query": [
+						{
+							"key": "_csrf",
+							"value": "{{csrfToken}}"
+						},
+						{
+							"key": "j_username",
+							"value": "00165286"
+						},
+						{
+							"key": "j_username_txt",
+							"value": "00165286"
+						},
+						{
+							"key": "j_password",
+							"value": "abc123$"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{authUrl}}/logout",
+					"host": [
+						"{{authUrl}}"
+					],
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postLogin Copy 2",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://erpdevelopment.brac.net/logout",
+					"protocol": "https",
+					"host": [
+						"erpdevelopment",
+						"brac",
+						"net"
+					],
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
